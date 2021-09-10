@@ -24,7 +24,8 @@ class PDFViewerTk(tk.Frame):
     def open(self, file, factor=None):
         doc = fitz.open(file)
         mat = fitz.Matrix(factor, factor) if factor else None
-        self.images = []
+        self._images = []
+        self._viewer.delete('1.0', 'end')
         self._read(doc, mat)
     
     def _read(self, doc, mat=None, n=0):
@@ -37,7 +38,7 @@ class PDFViewerTk(tk.Frame):
             tkimg = tk.PhotoImage(data=imgdata)
             self._viewer.image_create('end', image=tkimg)
             self._viewer.insert('end', '\n')
-            self.images.append(tkimg)
+            self._images.append(tkimg)
             self.after(5, self._read, doc, mat, n+1)
         except Exception as e:
             #print(e)
