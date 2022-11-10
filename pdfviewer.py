@@ -49,7 +49,7 @@ if __name__ == '__main__':
     if len(sys.argv) == 1:
         print(f'Usage: python {sys.argv[0]} <filename>')
         sys.exit(0)
-    factor = int(sys.argv[2]) if len(sys.argv) > 2 else 1
+    factor = float(sys.argv[2]) if len(sys.argv) > 2 else 1
     root = tk.Tk()
     viewer = PDFViewerTk(root, width=800, height=800, file=sys.argv[1], factor=factor)
     viewer.pack(fill='both', expand=1)
